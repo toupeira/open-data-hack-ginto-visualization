@@ -1,11 +1,18 @@
 body {
   font-family: "Roboto", sans-serif;
+  margin: 0 auto;
+  width: 1000px;
 }
 
 canvas {
-  margin-top: -120px;
+  margin-top: -80px;
 }
 
 #ginto-logo {
   height: 1em;
+}
+
+#building-selector-container {
+  text-align: center;
+  font-weight: bold;
 }

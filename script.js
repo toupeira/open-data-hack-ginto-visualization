@@ -19,7 +19,7 @@ function valueToColor(value) {
   hue *= (value / 100);
 
   // Use HSL to set the color (hue, full saturation, 50% lightness)
-  var color = 'hsl(' + hue + ', 100%, 50%)';
+  var color = 'hsl(' + hue + ', 75%, 50%)';
 
   return color;
 }
@@ -89,6 +89,10 @@ async function loadBuilding() {
       ]
     },
     options: {
+      layout: {
+        autoPadding: false,
+        padding: 0
+      },
       scales: {
         r: {
           pointLabels: {

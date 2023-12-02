@@ -12,26 +12,28 @@
       <a id="building-link" target="_blank"></a>
     </h1>
 
-    <label for="building-selector">Gebäude:</label>
-    <select id="building-selector" onchange="loadBuilding()">
-      <option value="b840c301-5c17-455b-9768-e67c0e9812f0">Naturmuseum St. Gallen</option>
-      <option value="54c949b4-19cd-4e39-89a2-df95a1b49725">Theater St. Gallen</option>
-      <option value="4192b1be-329f-45e7-93bc-1494656f5655">The Chedi Andermatt</option>
-      <option value="6b1bf6a5-06de-4817-9f26-0855f38f26ff">La Val Hotel & Spa</option>
-      <option value="ecdef361-3994-433d-87c2-b2ceaba36cfe">Bogentrakt</option>
-      <option value="1ed2dce2-8710-4b72-8658-5ac1787adafa">Jugendherberge Scuol</option>
-      <option value="6b1c627f-c2f8-4bc7-9e6c-e782962d1ad7">Bahnhof Zweisimmen</option>
-      <option value="f06b9f7e-8682-420e-a7d2-fee63bddc129">Gare Les Avants</option>
-      <option value="980c7456-b97f-414f-bf4e-0c507b28bd1f">Bahnhof Ins</option>
-      <option value="f9286e20-ec0f-4386-8e0c-eea1d28536f8">The Japanese by The Chedi Andermatt</option>
-      <option value="c2f05729-cf92-4821-af64-c34e24c5b89a">La Bonne Cave Weinbar und Vinothek</option>
-      <option value="f19a2773-858e-4e85-ba17-e04029dd1283">Congress Center Basel</option>
-      <option value="d783678b-e680-4d1a-8ee4-88b6ca4b0cc6">Messe Basel</option>
-      <option value="8dd99fab-df77-41fc-9b04-d1c9a6e7eb3d">Bibliothek und Stadtarchiv Zug</option>
-      <option value="a7a0ed75-d11b-43c5-82f1-757a751cdc52">Wellness-Therme FORTYSEVEN</option>
-    </select>
+    <div id="building-selector-container">
+      <label for="building-selector">Gebäude:</label>
+      <select id="building-selector" onchange="loadBuilding()">
+        <option value="b840c301-5c17-455b-9768-e67c0e9812f0">Naturmuseum St. Gallen</option>
+        <option value="54c949b4-19cd-4e39-89a2-df95a1b49725">Theater St. Gallen</option>
+        <option value="4192b1be-329f-45e7-93bc-1494656f5655">The Chedi Andermatt</option>
+        <option value="6b1bf6a5-06de-4817-9f26-0855f38f26ff">La Val Hotel & Spa</option>
+        <option value="ecdef361-3994-433d-87c2-b2ceaba36cfe">Bogentrakt</option>
+        <option value="1ed2dce2-8710-4b72-8658-5ac1787adafa">Jugendherberge Scuol</option>
+        <option value="6b1c627f-c2f8-4bc7-9e6c-e782962d1ad7">Bahnhof Zweisimmen</option>
+        <option value="f06b9f7e-8682-420e-a7d2-fee63bddc129">Gare Les Avants</option>
+        <option value="980c7456-b97f-414f-bf4e-0c507b28bd1f">Bahnhof Ins</option>
+        <option value="f9286e20-ec0f-4386-8e0c-eea1d28536f8">The Japanese by The Chedi Andermatt</option>
+        <option value="c2f05729-cf92-4821-af64-c34e24c5b89a">La Bonne Cave Weinbar und Vinothek</option>
+        <option value="f19a2773-858e-4e85-ba17-e04029dd1283">Congress Center Basel</option>
+        <option value="d783678b-e680-4d1a-8ee4-88b6ca4b0cc6">Messe Basel</option>
+        <option value="8dd99fab-df77-41fc-9b04-d1c9a6e7eb3d">Bibliothek und Stadtarchiv Zug</option>
+        <option value="a7a0ed75-d11b-43c5-82f1-757a751cdc52">Wellness-Therme FORTYSEVEN</option>
+      </select>
+    </div>
 
-    <div style="width: 800px;"><canvas id="chart" style="display: none"></canvas></div>
+    <div style="width: 1000px;"><canvas id="chart" style="display: none"></canvas></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <script src="script.js"></script>
