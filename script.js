@@ -17,6 +17,8 @@
     'Wellness-Therme FORTYSEVEN':          'a7a0ed75-d11b-43c5-82f1-757a751cdc52',
   };
 
+  // Fetch data and group into categories
+
   let id = LOCATIONS['La Val Hotel & Spa'];
   let response = await fetch(`data/${id}.json`);
   let data = await response.json();
@@ -36,16 +38,33 @@
   groupClassifications(data.areaClassifications);
   groupClassifications(data.pathClassifications);
 
+  // Calculate averages
   for (key in categories) {
     let category = categories[key];
     let sum = category.conformances.reduce((a, b) => a + b, 0);
     category.conformance = sum / category.conformances.length;
   }
 
+  // Sort categories by conformance
+  categories = Object.values(categories).sort((a, b) => {
+    if (a.conformance == b.conformance) {
+      return 0;
+    } else if (a.conformance < b.conformance) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+
+  // Draw chart
+
   let ctx = document.getElementById('chart').getContext('2d');
   let gradient = ctx.createLinearGradient(0, 0, 800, 0);
   gradient.addColorStop(0, 'red');
   gradient.addColorStop(1, 'green');
+
+  let labels = categories.map((value) => `${value.label} (${parseInt(value.conformance, 10)}%)`)
+  let conformances = categories.map(row => row.conformance);
 
   function valueToColor(value) {
     // Ensure the value is within the [0, 100] range
@@ -66,12 +85,12 @@
     {
       type: 'polarArea',
       data: {
-        labels: Object.values(categories).map(row => row.label),
+        labels: labels,
         datasets: [
           {
             label: 'Zugänglichkeit',
-            data: Object.values(categories).map(row => row.conformance),
-            backgroundColor: Object.values(categories).map(row => valueToColor(row.conformance)),
+            data: conformances,
+            backgroundColor: conformances.map(valueToColor),
           }
         ]
       },
@@ -89,7 +108,8 @@
         },
         plugins: {
           legend: {
-            display: false
+            display: false,
+            position: 'right',
           }
         }
       }
