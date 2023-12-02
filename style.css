@@ -5,7 +5,14 @@ body {
 }
 
 a {
-  color: #009994;
+  color: white;
+}
+
+h1 {
+  background: #009994;
+  color: white;
+  margin: 0;
+  padding: 1em 0.5em 0.5em;
 }
 
 #ginto-logo {
@@ -15,4 +22,10 @@ a {
 #selectors {
   text-align: center;
   font-weight: bold;
+  background: #f7d002;
+  padding: 0.5em;
+}
+
+#selectors select {
+  font-size: 110%;
 }
