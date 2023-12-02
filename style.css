@@ -8,6 +8,10 @@ canvas {
   margin-top: -80px;
 }
 
+a {
+  color: #009994;
+}
+
 #ginto-logo {
   height: 1em;
 }
