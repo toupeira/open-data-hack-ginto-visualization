@@ -32,7 +32,7 @@ async function loadBuilding() {
   let data = await response.json();
 
   document.getElementById('building-link').textContent = data.name;
-  document.getElementById('building-link').href = `https://www.ginto.guide/entries/${id}`;
+  document.getElementById('building-link').href = `https://www.ginto.guide/entries/${id}?rating_profile_id=78`;
 
   // Group classifications by categories
 
