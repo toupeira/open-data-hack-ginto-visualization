@@ -32,6 +32,12 @@
         <option value="a7a0ed75-d11b-43c5-82f1-757a751cdc52">Wellness-Therme FORTYSEVEN</option>
       </select>
 
+      <label for="category">Gruppierung:</label>
+      <select id="category-selector" onchange="loadBuilding()">
+        <option value="area">nach Raumtyp</option>
+        <option value="object">nach Objekttyp</option>
+      </select>
+
       <label for="profile-selector">Profil:</label>
       <select id="profile-selector">
         <option selected>Aktivrollstuhl</option>

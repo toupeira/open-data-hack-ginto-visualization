@@ -24,49 +24,66 @@ function valueToColor(value) {
   return color;
 }
 
+function sortBy(list, key, reverse) {
+  return list.sort((a, b) => {
+    if (a[key] == b[key]) {
+      return 0;
+    } else if (a[key] < b[key]) {
+      return reverse ? 1 : -1;
+    } else {
+      return reverse ? -1 : 1;
+    }
+  });
+}
+
+function truncate(string, length) {
+  if (string.length > length) {
+    return `${string.substring(0, length)}…`;
+  } else {
+    return string;
+  }
+}
+
 async function loadBuilding() {
   // Fetch data from API
-
   let id = document.getElementById('building-selector').value;
   let response = await fetch(`data/${id}.json`);
   let data = await response.json();
 
+  // Update link to building page
   document.getElementById('building-link').textContent = data.name;
   document.getElementById('building-link').href = `https://www.ginto.guide/entries/${id}?rating_profile_id=78`;
 
-  // Group classifications by categories
+  // Collect labels and conformance for each category
+  let categories = [];
+  let categoryType = document.getElementById('category-selector').value;
+  if (categoryType == 'area') {
+    categories = data.structure.displaySummary.subAreas.map((area) => {
+      return { label: area.name, conformance: area.accessibility.conformance };
+    });
+  } else {
+    groupClassifications(categories, data.areaClassifications);
+    groupClassifications(categories, data.pathClassifications);
 
-  let categories = {};
-
-  groupClassifications(categories, data.areaClassifications);
-  groupClassifications(categories, data.pathClassifications);
-
-  // Calculate averages
-  for (key in categories) {
-    let category = categories[key];
-    let sum = category.conformances.reduce((a, b) => a + b, 0);
-    category.conformance = sum / category.conformances.length;
+    // Calculate averages
+    for (key in categories) {
+      let category = categories[key];
+      let sum = category.conformances.reduce((a, b) => a + b, 0);
+      category.conformance = sum / category.conformances.length;
+    }
   }
 
   // Sort categories by conformance
-  categories = Object.values(categories).sort((a, b) => {
-    if (a.conformance == b.conformance) {
-      return 0;
-    } else if (a.conformance < b.conformance) {
-      return -1;
-    } else {
-      return 1;
-    }
-  });
+  categories = sortBy(Object.values(categories), 'label', true);
+  categories = sortBy(categories, 'conformance');
 
   // Draw chart
-
   let ctx = document.getElementById('chart').getContext('2d');
   let gradient = ctx.createLinearGradient(0, 0, 800, 0);
   gradient.addColorStop(0, 'red');
   gradient.addColorStop(1, 'green');
 
-  let labels = categories.map((value) => `${value.label} (${parseInt(value.conformance, 10)}%)`)
+  let labels = categories.map((value) => `${truncate(value.label, 30)} (${parseInt(value.conformance, 10)}%)`)
   let conformances = categories.map(row => row.conformance);
 
   let chart = document.getElementById('chart');
@@ -89,14 +106,19 @@ async function loadBuilding() {
       ]
     },
     options: {
-      aspectRatio: 1.3,
+      aspectRatio: 1.2,
       scales: {
         r: {
+          min: 0,
+          max: 100,
+          ticks: {
+            display: false,
+          },
           pointLabels: {
             display: true,
             centerPointLabels: true,
             font: {
-              size: 18
+              size: 14
             }
           }
         }
