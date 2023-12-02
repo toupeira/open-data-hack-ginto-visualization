@@ -89,10 +89,7 @@ async function loadBuilding() {
       ]
     },
     options: {
-      layout: {
-        autoPadding: false,
-        padding: 0
-      },
+      aspectRatio: 1.3,
       scales: {
         r: {
           pointLabels: {
